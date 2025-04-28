@@ -30,10 +30,10 @@ void loop() {
   
  Serial.print(getDistance());
 
- if(getDistance()>30)
- avoidObstacle();
- else
- moveForward();
+ if (getDistance() <= 30)
+  avoidObstacle();
+else
+  moveForward();
 
 
 }
@@ -52,12 +52,15 @@ float getDistance()
   return distance;
 }
 void moveForward() {
-  if (!goesForward) {
-    goesForward = true;
+  if (!goesForward)
+   {
+    analogWrite(ENA, 255);  
+    analogWrite(ENB, 255);   
     digitalWrite(LeftMotorForwardPin, HIGH);
     digitalWrite(RightMotorForwardPin, HIGH);
     digitalWrite(LeftMotorBackwardPin, LOW);
     digitalWrite(RightMotorBackwardPin, LOW);
+        goesForward = true;
   }
 }
 
@@ -75,12 +78,11 @@ void stopCar()
 
 
 void avoidObstacle(){
-
-    digitalWrite(LeftMotorForwardPin, LOW);
+analogWrite(ENA, 100);  
+analogWrite(ENB, 255);    
+    digitalWrite(LeftMotorForwardPin, HIGH);
     digitalWrite(LeftMotorBackwardPin, LOW);
-    digitalWrite(RightMotorForwardPin, LOW);
-    digitalWrite(RightMotorBackwardPin, HIGH);
-    digitalWrite(RightMotorBackwardPin, HIGH);
-  
+    digitalWrite(RightMotorForwardPin, HIGH);
+    digitalWrite(RightMotorBackwardPin, LOW);
 }
 
