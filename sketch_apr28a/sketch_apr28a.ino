@@ -22,10 +22,11 @@ void loop() {
 
 
 }
-int getDistance()
+
+float getDistance()
 {
-   float distance,duration;
-   digitalWrite(trig, LOW);
+  float distance, duration;
+  digitalWrite(trig, LOW);
   delayMicroseconds(2);
   digitalWrite(trig, HIGH);
   delayMicroseconds(10);
@@ -36,6 +37,7 @@ int getDistance()
   distance = duration / 29/ 2; //in cm
   return distance;
 }
+
 void moveForward() {
   if (!goesForward) {
     goesForward = true;
@@ -45,14 +47,27 @@ void moveForward() {
     digitalWrite(RightMotorBackwardPin, LOW);
   }
 }
+
 void stop ()
 {
   if(goesForward)
   {
-     digitalWrite(LeftMotorForwardPin, LOW);
+    digitalWrite(LeftMotorForwardPin, LOW);
     digitalWrite(RightMotorForwardPin, LOW);
     digitalWrite(LeftMotorBackwardPin, LOW);
     digitalWrite(RightMotorBackwardPin, LOW);
     goesForward=false;
+  }
+}
+
+void avoidObstacle(){
+  float distance = getDistance();
+
+  if (distance <= 30){
+    digitalWrite(LeftMotorForwardPin, LOW);
+    digitalWrite(LeftMotorBackwardPin, LOW);
+
+    digitalWrite(RightMotorForwardPin, LOW);
+    digitalWrite(RightMotorBackwardPin, High);
   }
 }
