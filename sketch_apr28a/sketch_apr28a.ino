@@ -24,6 +24,8 @@ void setup() {
   pinMode(ENB,OUTPUT);
   analogWrite(ENA,255);
   analogWrite(ENB,255);
+
+  randomSeed(analogRead(A0));
 }
 
 void loop() {
@@ -78,11 +80,21 @@ void stopCar()
 
 
 void avoidObstacle(){
-analogWrite(ENA, 100);  
-analogWrite(ENB, 255);    
+  int direction = random(0,2);
+  if(direction==0)
+  {
+    analogWrite(ENA, 255);  
+    analogWrite(ENB, 100); 
+  }
+  else
+     {
+      analogWrite(ENA, 100);  
+      analogWrite(ENB, 255);    
+     }
     digitalWrite(LeftMotorForwardPin, HIGH);
     digitalWrite(LeftMotorBackwardPin, LOW);
     digitalWrite(RightMotorForwardPin, HIGH);
     digitalWrite(RightMotorBackwardPin, LOW);
+    delay(400);
 }
 
