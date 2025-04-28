@@ -20,7 +20,7 @@ void loop() {
   
  Serial.print(getDistance());
  if(getDistance()>30)
- //change direction function(in process)
+ avoidObstacle();
  else
  moveForward();
 
@@ -63,7 +63,7 @@ void stopCar()
 }
 
 void avoidObstacle(){
-  
+
     digitalWrite(LeftMotorForwardPin, LOW);
     digitalWrite(LeftMotorBackwardPin, LOW);
 
