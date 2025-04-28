@@ -19,6 +19,10 @@ void setup() {
 void loop() {
   
  Serial.print(getDistance());
+ if(getDistance()>30)
+ //change direction function(in process)
+ else
+ moveForward();
 
 
 }
