@@ -1,9 +1,58 @@
-void setup() {
-  // put your setup code here, to run once:
+#define trig 7 
+#define echo 6
+#define RightMotorForwardPin 5
+#define RightMotorBackwardPin 4
+#define LeftMotorForwardPin 3
+#define LeftMotorBackwardPin 2
 
+bool goesForward = false;
+void setup() {
+  Serial.begin(9600);
+  pinMode(trig,OUTPUT);
+  pinMode(echo,INPUT);
+  pinMode(RightMotorForwardPin, OUTPUT);
+  pinMode(RightMotorBackwardPin, OUTPUT);
+  pinMode(LeftMotorForwardPin, OUTPUT);
+  pinMode(LeftMotorBackwardPin, OUTPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  
+ Serial.print(getDistance());
 
+
+}
+int getDistance()
+{
+   float distance,duration;
+   digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  duration = pulseIn(echo,HIGH);
+  delay(100); 
+
+  distance = duration / 29/ 2; //in cm
+  return distance;
+}
+void moveForward() {
+  if (!goesForward) {
+    goesForward = true;
+    digitalWrite(LeftMotorForwardPin, HIGH);
+    digitalWrite(RightMotorForwardPin, HIGH);
+    digitalWrite(LeftMotorBackwardPin, LOW);
+    digitalWrite(RightMotorBackwardPin, LOW);
+  }
+}
+void stop ()
+{
+  if(goesForward)
+  {
+     digitalWrite(LeftMotorForwardPin, LOW);
+    digitalWrite(RightMotorForwardPin, LOW);
+    digitalWrite(LeftMotorBackwardPin, LOW);
+    digitalWrite(RightMotorBackwardPin, LOW);
+    goesForward=false;
+  }
 }
