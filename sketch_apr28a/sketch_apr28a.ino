@@ -4,23 +4,34 @@
 #define RightMotorBackwardPin 4
 #define LeftMotorForwardPin 3
 #define LeftMotorBackwardPin 2
+#define ENA 9
+#define ENB 10
 
 bool goesForward = false;
 void setup() {
   Serial.begin(9600);
+
   pinMode(trig,OUTPUT);
   pinMode(echo,INPUT);
+
+
   pinMode(RightMotorForwardPin, OUTPUT);
   pinMode(RightMotorBackwardPin, OUTPUT);
   pinMode(LeftMotorForwardPin, OUTPUT);
   pinMode(LeftMotorBackwardPin, OUTPUT);
+
+  pinMode(ENA,OUTPUT);
+  pinMode(ENB,OUTPUT);
+  analogWrite(ENA,255);
+  analogWrite(ENB,255);
 }
 
 void loop() {
   
  Serial.print(getDistance());
+
  if(getDistance()>30)
- //change direction function(in process)
+ avoidObstacle();
  else
  moveForward();
 
@@ -61,3 +72,12 @@ void stopCar()
     goesForward=false;
   }
 }
+void avoidObstacle()
+{
+
+    digitalWrite(LeftMotorForwardPin, LOW);
+    digitalWrite(LeftMotorBackwardPin, LOW);
+
+    digitalWrite(RightMotorForwardPin, LOW);
+    digitalWrite(RightMotorBackwardPin, HIGH);
+  }
