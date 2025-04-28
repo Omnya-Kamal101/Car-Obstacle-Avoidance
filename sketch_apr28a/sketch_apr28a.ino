@@ -19,25 +19,27 @@ void setup() {
 void loop() {
   
  Serial.print(getDistance());
+ if(getDistance()>30)
+ //change direction function(in process)
+ else
+ moveForward();
 
 
 }
-
 float getDistance()
 {
-  float distance, duration;
-  digitalWrite(trig, LOW);
+   float distance,duration;
+   digitalWrite(trig, LOW);
   delayMicroseconds(2);
   digitalWrite(trig, HIGH);
   delayMicroseconds(10);
   digitalWrite(trig, LOW);
   duration = pulseIn(echo,HIGH);
-  delay(100); 
+ 
 
   distance = duration / 29/ 2; //in cm
   return distance;
 }
-
 void moveForward() {
   if (!goesForward) {
     goesForward = true;
@@ -48,11 +50,11 @@ void moveForward() {
   }
 }
 
-void stop ()
+void stopCar()
 {
   if(goesForward)
   {
-    digitalWrite(LeftMotorForwardPin, LOW);
+     digitalWrite(LeftMotorForwardPin, LOW);
     digitalWrite(RightMotorForwardPin, LOW);
     digitalWrite(LeftMotorBackwardPin, LOW);
     digitalWrite(RightMotorBackwardPin, LOW);
@@ -61,9 +63,7 @@ void stop ()
 }
 
 void avoidObstacle(){
-  float distance = getDistance();
-
-  if (distance <= 30){
+  
     digitalWrite(LeftMotorForwardPin, LOW);
     digitalWrite(LeftMotorBackwardPin, LOW);
 
