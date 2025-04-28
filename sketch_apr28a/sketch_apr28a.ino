@@ -22,7 +22,7 @@ void loop() {
 
 
 }
-int getDistance()
+float getDistance()
 {
    float distance,duration;
    digitalWrite(trig, LOW);
@@ -31,7 +31,7 @@ int getDistance()
   delayMicroseconds(10);
   digitalWrite(trig, LOW);
   duration = pulseIn(echo,HIGH);
-  delay(100); 
+ 
 
   distance = duration / 29/ 2; //in cm
   return distance;
@@ -45,7 +45,8 @@ void moveForward() {
     digitalWrite(RightMotorBackwardPin, LOW);
   }
 }
-void stop ()
+
+void stopCar()
 {
   if(goesForward)
   {
