@@ -72,12 +72,15 @@ void stopCar()
     goesForward=false;
   }
 }
-void avoidObstacle()
-{
+
+
+void avoidObstacle(){
 
     digitalWrite(LeftMotorForwardPin, LOW);
     digitalWrite(LeftMotorBackwardPin, LOW);
-
     digitalWrite(RightMotorForwardPin, LOW);
     digitalWrite(RightMotorBackwardPin, HIGH);
-  }
+    digitalWrite(RightMotorBackwardPin, HIGH);
+  
+}
+
