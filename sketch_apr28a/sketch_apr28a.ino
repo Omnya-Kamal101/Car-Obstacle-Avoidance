@@ -69,5 +69,5 @@ void avoidObstacle(){
 
     digitalWrite(RightMotorForwardPin, LOW);
     digitalWrite(RightMotorBackwardPin, High);
-  }
+  
 }
