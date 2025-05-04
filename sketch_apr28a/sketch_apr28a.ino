@@ -80,6 +80,18 @@ void stopCar()
 
 
 void avoidObstacle(){
+  stopCar();
+  delay(250);
+   
+  digitalWrite(LeftMotorForwardPin, LOW);
+  digitalWrite(LeftMotorBackwardPin, HIGH);
+  digitalWrite(RightMotorForwardPin, LOW);
+  digitalWrite(RightMotorBackwardPin, HIGH);
+  delay(350);
+  stopCar();
+  delay(150);
+  
+
   int direction = random(0,2);
   if(direction==0)
   {
