@@ -1,9 +1,9 @@
 #define trig 5 
 #define echo 6
-#define RightMotorForwardPin 3
-#define RightMotorBackwardPin 4
-#define LeftMotorForwardPin 7
-#define LeftMotorBackwardPin 8
+#define RightMotorForwardPin 4
+#define RightMotorBackwardPin 3
+#define LeftMotorForwardPin 8
+#define LeftMotorBackwardPin 7
 #define ENA 10
 #define ENB 11
 
@@ -82,16 +82,16 @@ void stopCar()
 void avoidObstacle(){
   stopCar();
   delay(250);
-   
+
   digitalWrite(LeftMotorForwardPin, LOW);
   digitalWrite(LeftMotorBackwardPin, HIGH);
   digitalWrite(RightMotorForwardPin, LOW);
   digitalWrite(RightMotorBackwardPin, HIGH);
+
   delay(350);
   stopCar();
   delay(150);
   
-
   int direction = random(0,2);
   if(direction==0)
   {
@@ -107,6 +107,6 @@ void avoidObstacle(){
   digitalWrite(LeftMotorBackwardPin, LOW);
   digitalWrite(RightMotorForwardPin, HIGH);
   digitalWrite(RightMotorBackwardPin, LOW);
+  
   delay(400);
 }
-
