@@ -32,7 +32,7 @@ void loop() {
 
   float distance = getDistance();
 
-  if (distance <= 30)
+  if (distance <= 8)
     avoidObstacle();
   else
     moveForward();
@@ -54,7 +54,7 @@ float getDistance()
   return distance;
 }
 void moveForward() {
-  if (goesForward)
+  if (!goesForward)
    {
     analogWrite(ENA, 255);  
     analogWrite(ENB, 255);   
@@ -68,7 +68,7 @@ void moveForward() {
 
 void stopCar()
 {
-  if(!goesForward)
+  if(goesForward)
   {
     digitalWrite(LeftMotorForwardPin, LOW);
     digitalWrite(RightMotorForwardPin, LOW);
