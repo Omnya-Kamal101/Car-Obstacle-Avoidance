@@ -1,11 +1,11 @@
-#define trig 7 
+#define trig 5 
 #define echo 6
-#define RightMotorForwardPin 5
+#define RightMotorForwardPin 3
 #define RightMotorBackwardPin 4
-#define LeftMotorForwardPin 3
-#define LeftMotorBackwardPin 2
-#define ENA 9
-#define ENB 10
+#define LeftMotorForwardPin 6
+#define LeftMotorBackwardPin 7
+#define ENA 10
+#define ENB 11
 
 bool goesForward = false;
 void setup() {
@@ -34,15 +34,15 @@ void loop() {
 
  if (getDistance() <= 30)
   avoidObstacle();
-else
+ else
   moveForward();
 
 
 }
 float getDistance()
 {
-   float distance,duration;
-   digitalWrite(trig, LOW);
+  float distance,duration;
+  digitalWrite(trig, LOW);
   delayMicroseconds(2);
   digitalWrite(trig, HIGH);
   delayMicroseconds(10);
@@ -62,7 +62,7 @@ void moveForward() {
     digitalWrite(RightMotorForwardPin, HIGH);
     digitalWrite(LeftMotorBackwardPin, LOW);
     digitalWrite(RightMotorBackwardPin, LOW);
-        goesForward = true;
+    goesForward = true;
   }
 }
 
@@ -70,7 +70,7 @@ void stopCar()
 {
   if(goesForward)
   {
-     digitalWrite(LeftMotorForwardPin, LOW);
+    digitalWrite(LeftMotorForwardPin, LOW);
     digitalWrite(RightMotorForwardPin, LOW);
     digitalWrite(LeftMotorBackwardPin, LOW);
     digitalWrite(RightMotorBackwardPin, LOW);
@@ -87,14 +87,14 @@ void avoidObstacle(){
     analogWrite(ENB, 100); 
   }
   else
-     {
-      analogWrite(ENA, 100);  
-      analogWrite(ENB, 255);    
-     }
-    digitalWrite(LeftMotorForwardPin, HIGH);
-    digitalWrite(LeftMotorBackwardPin, LOW);
-    digitalWrite(RightMotorForwardPin, HIGH);
-    digitalWrite(RightMotorBackwardPin, LOW);
-    delay(400);
+  {
+    analogWrite(ENA, 100);  
+    analogWrite(ENB, 255);    
+  }
+  digitalWrite(LeftMotorForwardPin, HIGH);
+  digitalWrite(LeftMotorBackwardPin, LOW);
+  digitalWrite(RightMotorForwardPin, HIGH);
+  digitalWrite(RightMotorBackwardPin, LOW);
+  delay(400);
 }
 
