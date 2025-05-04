@@ -1,19 +1,19 @@
-#define trig 5 
-#define echo 6
-#define RightMotorForwardPin 4
+#define trig 12 
+#define echo 8
+#define RightMotorForwardPin 5
 #define RightMotorBackwardPin 3
-#define LeftMotorForwardPin 8
-#define LeftMotorBackwardPin 7
+#define LeftMotorForwardPin 9
+#define LeftMotorBackwardPin 6
 #define ENA 10
 #define ENB 11
+#define maxSpeed 150
+#define minSpeed 80
 
-bool goesForward = false;
 void setup() {
   Serial.begin(9600);
 
   pinMode(trig,OUTPUT);
   pinMode(echo,INPUT);
-
 
   pinMode(RightMotorForwardPin, OUTPUT);
   pinMode(RightMotorBackwardPin, OUTPUT);
@@ -22,22 +22,31 @@ void setup() {
 
   pinMode(ENA,OUTPUT);
   pinMode(ENB,OUTPUT);
-  analogWrite(ENA,255);
-  analogWrite(ENB,255);
+  analogWrite(ENA, maxSpeed);  
+  analogWrite(ENB, maxSpeed);  
 
   randomSeed(analogRead(A0));
+
+  delay(2000);
 }
 
 void loop() {
 
   float distance = getDistance();
 
-  if (distance <= 8)
-    avoidObstacle();
-  else
+  if (distance > 40)
     moveForward();
+  else{
+    stopCar();
+    delay(400);
+    backWard();
+    delay(400);
+    stopCar();
+    delay(400);
+    avoidObstacle();
+  }
 
-
+  delay(2000);
 }
 float getDistance()
 {
@@ -53,60 +62,57 @@ float getDistance()
   distance = duration / 29/ 2; //in cm
   return distance;
 }
+
 void moveForward() {
-  if (!goesForward)
-   {
-    analogWrite(ENA, 255);  
-    analogWrite(ENB, 255);   
-    digitalWrite(LeftMotorForwardPin, HIGH);
-    digitalWrite(RightMotorForwardPin, HIGH);
-    digitalWrite(LeftMotorBackwardPin, LOW);
-    digitalWrite(RightMotorBackwardPin, LOW);
-    goesForward = true;
-  }
+  
+  analogWrite(ENA, maxSpeed);  
+  analogWrite(ENB, maxSpeed);   
+  digitalWrite(LeftMotorForwardPin, HIGH);
+  digitalWrite(RightMotorForwardPin, HIGH);
+  digitalWrite(LeftMotorBackwardPin, LOW);
+  digitalWrite(RightMotorBackwardPin, LOW);
+    
+}
+
+void backWard()
+{
+  analogWrite(ENA, maxSpeed);  
+  analogWrite(ENB, maxSpeed);   
+  digitalWrite(LeftMotorForwardPin, LOW);
+  digitalWrite(RightMotorForwardPin, LOW);
+  digitalWrite(LeftMotorBackwardPin, HIGH);
+  digitalWrite(RightMotorBackwardPin, HIGH);
 }
 
 void stopCar()
 {
-  if(goesForward)
-  {
-    digitalWrite(LeftMotorForwardPin, LOW);
-    digitalWrite(RightMotorForwardPin, LOW);
-    digitalWrite(LeftMotorBackwardPin, LOW);
-    digitalWrite(RightMotorBackwardPin, LOW);
-    goesForward=false;
-  }
+  digitalWrite(LeftMotorForwardPin, LOW);
+  digitalWrite(RightMotorForwardPin, LOW);
+  digitalWrite(LeftMotorBackwardPin, LOW);
+  digitalWrite(RightMotorBackwardPin, LOW); 
 }
 
-
 void avoidObstacle(){
-  stopCar();
-  delay(250);
-
-  digitalWrite(LeftMotorForwardPin, LOW);
-  digitalWrite(LeftMotorBackwardPin, HIGH);
-  digitalWrite(RightMotorForwardPin, LOW);
-  digitalWrite(RightMotorBackwardPin, HIGH);
-
-  delay(350);
-  stopCar();
-  delay(150);
   
   int direction = random(0,2);
   if(direction==0)
   {
-    analogWrite(ENA, 255);  
-    analogWrite(ENB, 100); 
+    analogWrite(ENA, maxSpeed);  
+    analogWrite(ENB, minSpeed); 
+    digitalWrite(LeftMotorForwardPin, HIGH);
+    digitalWrite(LeftMotorBackwardPin, LOW);
+    digitalWrite(RightMotorForwardPin, LOW);
+    digitalWrite(RightMotorBackwardPin, HIGH);
   }
   else
   {
-    analogWrite(ENA, 100);  
-    analogWrite(ENB, 255);    
+    analogWrite(ENA, minSpeed);  
+    analogWrite(ENB, maxSpeed); 
+    digitalWrite(LeftMotorForwardPin, LOW);
+    digitalWrite(LeftMotorBackwardPin, HIGH);
+    digitalWrite(RightMotorForwardPin, HIGH);
+    digitalWrite(RightMotorBackwardPin, LOW);
   }
-  digitalWrite(LeftMotorForwardPin, HIGH);
-  digitalWrite(LeftMotorBackwardPin, LOW);
-  digitalWrite(RightMotorForwardPin, HIGH);
-  digitalWrite(RightMotorBackwardPin, LOW);
   
   delay(400);
 }
