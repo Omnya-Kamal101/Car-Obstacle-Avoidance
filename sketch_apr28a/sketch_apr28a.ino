@@ -2,8 +2,8 @@
 #define echo 6
 #define RightMotorForwardPin 3
 #define RightMotorBackwardPin 4
-#define LeftMotorForwardPin 6
-#define LeftMotorBackwardPin 7
+#define LeftMotorForwardPin 7
+#define LeftMotorBackwardPin 8
 #define ENA 10
 #define ENB 11
 
@@ -29,19 +29,20 @@ void setup() {
 }
 
 void loop() {
-  
- Serial.print(getDistance());
 
- if (getDistance() <= 30)
-  avoidObstacle();
- else
-  moveForward();
+  float distance = getDistance();
+
+  if (distance <= 30)
+    avoidObstacle();
+  else
+    moveForward();
 
 
 }
 float getDistance()
 {
   float distance,duration;
+
   digitalWrite(trig, LOW);
   delayMicroseconds(2);
   digitalWrite(trig, HIGH);
@@ -49,7 +50,6 @@ float getDistance()
   digitalWrite(trig, LOW);
   duration = pulseIn(echo,HIGH);
  
-
   distance = duration / 29/ 2; //in cm
   return distance;
 }
