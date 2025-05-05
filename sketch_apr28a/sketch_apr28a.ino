@@ -6,8 +6,7 @@
 #define LeftMotorBackwardPin 6
 #define ENA 10
 #define ENB 11
-#define maxSpeed 150
-#define minSpeed 80
+#define maxSpeed 100
 
 void setup() {
   Serial.begin(9600);
@@ -34,7 +33,7 @@ void loop() {
 
   float distance = getDistance();
 
-  if (distance > 40)
+  if (distance > 35)
     moveForward();
   else{
     stopCar();
@@ -46,7 +45,7 @@ void loop() {
     avoidObstacle();
   }
 
-  delay(2000);
+  delay(200);
 }
 float getDistance()
 {
@@ -98,7 +97,7 @@ void avoidObstacle(){
   if(direction==0)
   {
     analogWrite(ENA, maxSpeed);  
-    analogWrite(ENB, minSpeed); 
+    analogWrite(ENB, maxSpeed); 
     digitalWrite(LeftMotorForwardPin, HIGH);
     digitalWrite(LeftMotorBackwardPin, LOW);
     digitalWrite(RightMotorForwardPin, LOW);
@@ -106,7 +105,7 @@ void avoidObstacle(){
   }
   else
   {
-    analogWrite(ENA, minSpeed);  
+    analogWrite(ENA, maxSpeed);  
     analogWrite(ENB, maxSpeed); 
     digitalWrite(LeftMotorForwardPin, LOW);
     digitalWrite(LeftMotorBackwardPin, HIGH);
@@ -114,5 +113,4 @@ void avoidObstacle(){
     digitalWrite(RightMotorBackwardPin, LOW);
   }
   
-  delay(400);
 }
