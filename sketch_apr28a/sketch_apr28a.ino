@@ -6,7 +6,7 @@
 #define LeftMotorBackwardPin 6
 #define ENA 10
 #define ENB 11
-#define maxSpeed 100
+#define maxSpeed 255
 
 void setup() {
   Serial.begin(9600);
@@ -33,7 +33,7 @@ void loop() {
 
   float distance = getDistance();
 
-  if (distance > 35)
+  if (distance > 70)
     moveForward();
   else{
     stopCar();
