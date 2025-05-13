@@ -1,6 +1,5 @@
 #define trig 12 
 #define echo 8
-<<<<<<< HEAD
 #define RightMotorForwardPin 5
 #define RightMotorBackwardPin 3
 #define LeftMotorForwardPin 9
@@ -14,7 +13,6 @@
 #define LeftMotorBackwardPin 6 //In2
 #define ENA 10
 #define ENB 11
->>>>>>> dbcfe24c1df5ab4005d98c58aeab13d82a31a1fd
 #define maxSpeed 255
 //0-->255
 void setup() {
@@ -74,11 +72,7 @@ float getDistance()
 }
 
 void moveForward() {
-<<<<<<< HEAD
   
-=======
->>>>>>> dbcfe24c1df5ab4005d98c58aeab13d82a31a1fd
-
   analogWrite(ENA, maxSpeed);  
   analogWrite(ENB, maxSpeed);   
   digitalWrite(LeftMotorForwardPin, HIGH);
@@ -90,10 +84,6 @@ void moveForward() {
 
 void backWard()
 {
-<<<<<<< HEAD
-   
-=======
->>>>>>> dbcfe24c1df5ab4005d98c58aeab13d82a31a1fd
   analogWrite(ENA, maxSpeed);  
   analogWrite(ENB, maxSpeed);   
   digitalWrite(LeftMotorForwardPin, LOW);
@@ -116,11 +106,7 @@ void avoidObstacle(){
   //0-->1=0,1
   if(direction==0)
   {
-<<<<<<< HEAD
-    //Right
-=======
     // turn right
->>>>>>> dbcfe24c1df5ab4005d98c58aeab13d82a31a1fd
     analogWrite(ENA, maxSpeed);  
     analogWrite(ENB, maxSpeed); 
     digitalWrite(LeftMotorForwardPin, HIGH);
@@ -130,11 +116,7 @@ void avoidObstacle(){
   }
   else
   {
-<<<<<<< HEAD
-    //Left
-=======
     // turn left
->>>>>>> dbcfe24c1df5ab4005d98c58aeab13d82a31a1fd
     analogWrite(ENA, maxSpeed);  
     analogWrite(ENB, maxSpeed); 
     digitalWrite(LeftMotorForwardPin, LOW);
