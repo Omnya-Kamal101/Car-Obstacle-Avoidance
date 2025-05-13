@@ -34,9 +34,17 @@ void loop() {
    delay (3000);
 
   float distance = getDistance();
-if (distance <= 0 || distance > 500) {
-  return;  
+
+Serial.print("Distance: ");
+Serial.println(distance);
+if (distance < 70)
+ {
+  delay(100);
+  distance = getDistance(); 
 }
+Serial.print("Distance: ");
+Serial.println(distance);
+
   if (distance > 70)
     moveForward();
   else{
@@ -67,7 +75,8 @@ float getDistance()
 }
 
 void moveForward() {
-  
+    Serial.println("Moving Forward");
+
   analogWrite(ENA, maxSpeed);  
   analogWrite(ENB, maxSpeed);   
   digitalWrite(LeftMotorForwardPin, HIGH);
@@ -79,6 +88,7 @@ void moveForward() {
 
 void backWard()
 {
+   Serial.println("Moving Backward");
   analogWrite(ENA, maxSpeed);  
   analogWrite(ENB, maxSpeed);   
   digitalWrite(LeftMotorForwardPin, LOW);
@@ -96,7 +106,7 @@ void stopCar()
 }
 
 void avoidObstacle(){
-  
+  Serial.println("Avoiding Obstacle");
   int direction = random(0,2);
   if(direction==0)
   {
