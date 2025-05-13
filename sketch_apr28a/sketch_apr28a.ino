@@ -30,13 +30,13 @@ void setup() {
 }
 
 void loop() {
-  if (distance <= 0 || distance > 500) {
-  return;  
-}
+  
    delay (3000);
 
   float distance = getDistance();
-
+if (distance <= 0 || distance > 500) {
+  return;  
+}
   if (distance > 70)
     moveForward();
   else{
