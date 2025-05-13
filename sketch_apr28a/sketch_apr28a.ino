@@ -4,10 +4,10 @@
 #define RightMotorBackwardPin 3
 #define LeftMotorForwardPin 9
 #define LeftMotorBackwardPin 6
-#define ENA 10
-#define ENB 11
+#define ENA 10  //Right
+#define ENB 11  //Left
 #define maxSpeed 255
-
+//0-->255
 void setup() {
   Serial.begin(9600);
 
@@ -65,7 +65,7 @@ float getDistance()
 }
 
 void moveForward() {
-    Serial.println("Moving Forward");
+  
 
   analogWrite(ENA, maxSpeed);  
   analogWrite(ENB, maxSpeed);   
@@ -78,7 +78,7 @@ void moveForward() {
 
 void backWard()
 {
-   Serial.println("Moving Backward");
+   
   analogWrite(ENA, maxSpeed);  
   analogWrite(ENB, maxSpeed);   
   digitalWrite(LeftMotorForwardPin, LOW);
@@ -96,10 +96,12 @@ void stopCar()
 }
 
 void avoidObstacle(){
-  Serial.println("Avoiding Obstacle");
+  
   int direction = random(0,2);
+  //0-->1=0,1
   if(direction==0)
   {
+    //Right
     analogWrite(ENA, maxSpeed);  
     analogWrite(ENB, maxSpeed); 
     digitalWrite(LeftMotorForwardPin, HIGH);
@@ -109,6 +111,7 @@ void avoidObstacle(){
   }
   else
   {
+    //Left
     analogWrite(ENA, maxSpeed);  
     analogWrite(ENB, maxSpeed); 
     digitalWrite(LeftMotorForwardPin, LOW);
