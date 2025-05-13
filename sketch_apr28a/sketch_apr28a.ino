@@ -30,7 +30,7 @@ void setup() {
 }
 
 void loop() {
-
+   delay (3000);
   float distance = getDistance();
 
   if (distance > 70)
