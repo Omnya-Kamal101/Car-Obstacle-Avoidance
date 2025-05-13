@@ -1,9 +1,9 @@
 #define trig 12 
 #define echo 8
-#define RightMotorForwardPin 5
-#define RightMotorBackwardPin 3
-#define LeftMotorForwardPin 9
-#define LeftMotorBackwardPin 6
+#define RightMotorForwardPin 5 // IN3
+#define RightMotorBackwardPin 3 // In4
+#define LeftMotorForwardPin 9 // In1
+#define LeftMotorBackwardPin 6 //In2
 #define ENA 10
 #define ENB 11
 #define maxSpeed 255
@@ -65,7 +65,6 @@ float getDistance()
 }
 
 void moveForward() {
-    Serial.println("Moving Forward");
 
   analogWrite(ENA, maxSpeed);  
   analogWrite(ENB, maxSpeed);   
@@ -78,7 +77,6 @@ void moveForward() {
 
 void backWard()
 {
-   Serial.println("Moving Backward");
   analogWrite(ENA, maxSpeed);  
   analogWrite(ENB, maxSpeed);   
   digitalWrite(LeftMotorForwardPin, LOW);
@@ -96,10 +94,11 @@ void stopCar()
 }
 
 void avoidObstacle(){
-  Serial.println("Avoiding Obstacle");
+  
   int direction = random(0,2);
   if(direction==0)
   {
+    // turn right
     analogWrite(ENA, maxSpeed);  
     analogWrite(ENB, maxSpeed); 
     digitalWrite(LeftMotorForwardPin, HIGH);
@@ -109,6 +108,7 @@ void avoidObstacle(){
   }
   else
   {
+    // turn left
     analogWrite(ENA, maxSpeed);  
     analogWrite(ENB, maxSpeed); 
     digitalWrite(LeftMotorForwardPin, LOW);
